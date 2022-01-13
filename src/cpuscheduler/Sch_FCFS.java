@@ -23,7 +23,7 @@ public class Sch_FCFS extends Scheduler{
             public int compare(Process o1, Process o2) {
                 return (o1.getArrivalTime() >= o2.getArrivalTime()) ? 1 : -1;
             }
-        });
+        }); //dung giao dien Comparator cua java de so sanh arrival time  cua hai tien trinh, tien trinh nao den truoc thi thuc thi truoc
     }
     
     @Override
@@ -38,9 +38,9 @@ public class Sch_FCFS extends Scheduler{
     
     @Override
     public void setScheduler(Scheduler method) {
-        Iterator<Process> itr = pq.iterator();
+        Iterator<Process> itr = pq.iterator(); // duyet cac phan tu tu dau den cuoi cua collection bang iterator
         while(itr.hasNext()){
-            method.addProc(itr.next());
+            method.addProc(itr.next());// lan luot them cac tien trinh vao , sau khi xu li xong thi remove
             itr.remove();
         }
     }
@@ -57,7 +57,7 @@ public class Sch_FCFS extends Scheduler{
 
     @Override
     public boolean isProcLeft() {
-        return !pq.isEmpty();
+        return !pq.isEmpty();//kiem tra xem con tien trinh nao con sot lai khong
     }
     
 }
