@@ -15,7 +15,7 @@ import java.util.Random;
  * @author soheilchangizi
  */
 public class CPU {
-    
+    //khai bao cac thuoc tinh cua class CPU
     private Scheduler sm;
     private double cs = 0.4;
     private int csCount = 0;
@@ -37,16 +37,16 @@ public class CPU {
     private double Util = 0.0;
     private double Potency = 0.0;
     
-    
+    //tao phuong thuc khoi tao co tham so
     CPU(String data, String schName) {
         levels.clear();
-        sm = setSchMethod(schName);
-        sm.setScheduler(sm);
+        sm = setSchMethod(schName);//xem thuat toan lap lich minh chon la gi
+        sm.setScheduler(sm);//ham thuc hien thuat toan
         activeProc = null;
         Process proc = null;
         double b = 0, d = 0;
         int p = 0;
-        String[] lines = data.split("\n");
+        String[] lines = data.split("\n");//tach chuoi xu li
         int i = 1;
         for (String line : lines) {
             String[] split = line.split("\\s+");
@@ -62,21 +62,21 @@ public class CPU {
     }
     
     CPU(String data, ArrayList<String> schName, String isPreemptive) {
-        levels.addAll(schName);
+        levels.addAll(schName);//add tat cac cac loai thuat toan vao level
         sm = setSchMethod(isPreemptive + "Multi Level");
         sm.setScheduler(sm);
         activeProc = null;
         Process proc = null;
         double b = 0, d = 0;
         int p = 0;
-        String[] lines = data.split("\n");
+        String[] lines = data.split("\n");//tach du lieu trong chuoi bang dau xuong hang
         int i = 1;
         for (String line : lines) {
-            String[] split = line.split("\\s+");
+            String[] split = line.split("\\s+"); //tach du lieu trong chuoi bang dau cach
             b = Double.parseDouble(split[0]);
             d = Double.parseDouble(split[1]);
             p = (int)Double.parseDouble(split[2]);
-            proc = new Process(i, b, d, p);
+            proc = new Process(i, b, d, p); //tao process voi cac thong so
             proc.setLevel((int)Double.parseDouble(split[3]));
             i++;
             allProcs.add(proc);
@@ -88,7 +88,7 @@ public class CPU {
         Process p;
         randomData.clear();
         for (int i = 0; i < processNum; i++) {
-            p = new Process(i+1, 8.33, 2.1, 2.46, 0.7);
+            p = new Process(i+1, 8.33, 2.1, 2.46, 0.7);// ?????
             p.setLevel(new Random().nextInt(levelNum)+1);
             randomData.add(p.getBurstTime() + " " + p.getDelayTime() 
                     + " " + p.getPriority() + " " + p.getLevel());
@@ -110,7 +110,7 @@ public class CPU {
         Process p;
         for (int i = 0; i < procQueue.size(); i++) {
             p = (Process) procQueue.get(i);
-            if (p.getArrivalTime() - currentTime < 1e-1) {
+            if (p.getArrivalTime() - currentTime < 1e-1) { //1e -1 la 0.1 trong he thap phan
                 readyQueue.add(p);
                 sm.addProc(p);
             }
